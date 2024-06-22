@@ -1,0 +1,68 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Basic styling for navbar */
+  .navbar {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    align-items: center;
+    height: 60px; /* Adjust height as needed */
+    padding: 0 20px;
+  }
+  
+  /* Sidebar styling */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    height: 100%;
+    width: 250px;
+    background-color: #444;
+    padding-top: 60px;
+    transition: 0.3s;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+  }
+  
+  .sidebar ul li {
+    padding: 15px 20px;
+    border-bottom: 1px solid #666;
+  }
+  
+  .sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .sidebar-open {
+    left: 0;
+  }
+  
+  /* Styles for the toggle icon */
+  .navbar-toggle {
+    cursor: pointer;
+  }
+  
+  .toggle-icon {
+    font-size: 24px;
+    transition: transform 0.3s;
+  }
+  
+  .rotate {
+    transform: rotate(135deg);
+  }
+  
+  /* Main content area */
+  .content {
+    margin-top: 60px; /* Adjust this based on your sidebar height */
+    padding: 20px;
+  }
+  

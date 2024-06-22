@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar with Sidebar</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <!-- Toggle button -->
+    <div id="toggleButton" class="navbar-toggle" onclick="toggleSidebar()">
+      <div class="toggle-icon" id="toggleIcon">+</div>
+    </div>
+  </nav>
+  
+  <div id="sidebar" class="sidebar">
+    <ul>
+      <li><a href="#">Resume</a></li>
+      <li><a href="#">History</a></li>
+      <li><a href="#">Liked Videos</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <!-- Your main content goes here -->
+    <h2>Main Content Area</h2>
+    <p>This is the main content of your webpage.</p>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('sidebar-open');
+      const toggleIcon = document.getElementById('toggleIcon');
+      toggleIcon.classList.toggle('rotate');
+    }
+  </script>
+</body>
+</html>
