@@ -1,40 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Navbar with Sidebar</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Categories</title>
+    <style>
+        .filter-bar button {
+            margin: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .filter-bar button.active {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="button"><a href="index.html">Button</a></div>
-    <div id="toggleButton" class="navbar-toggle" onclick="toggleSidebar()">
-      <div class="toggle-icon" id="toggleIcon">+</div>
+    <!-- First filter bar for years -->
+    <div class="filter-bar" id="yearFilterBar">
+        <button data-year="2002">2002</button>
+        <button data-year="2004">2004</button>
+        <button data-year="2006">2006</button>
+        <button data-year="2008">2008</button>
+        <button data-year="2010">2010</button>
     </div>
-  </nav>
-  
-  <div id="sidebar" class="sidebar">
-    <ul>
-      <li><a href="#">Resume</a></li>
-      <li><a href="#">History</a></li>
-      <li><a href="#">Liked Videos</a></li>
-    </ul>
-  </div>
 
-  <div class="content">
-    <!-- Your main content goes here -->
-    <h2>Main Content Area</h2>
-    <p>This is the main content of your webpage.</p>
-  </div>
+    <!-- Second filter bar for categories -->
+    <div class="filter-bar" id="categoryFilterBar">
+        <button data-category="Action">Action</button>
+        <button data-category="Horror">Horror</button>
+        <button data-category="Funny">Funny</button>
+        <button data-category="Drama">Drama</button>
+        <button data-category="Sci-Fi">Sci-Fi</button>
+    </div>
 
-  <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      sidebar.classList.toggle('sidebar-open');
-      const toggleIcon = document.getElementById('toggleIcon');
-      toggleIcon.classList.toggle('rotate');
-    }
-  </script>
+    <!-- First div -->
+    <div>
+        <!-- Second div inside the first div -->
+        <div>
+            <!-- Ten paragraphs inside the second div -->
+            <p3 data-name="Action Horror Funny" data-year="2002">Action Horror Funny 2002</p3>
+            <p3 data-name="Drama Sci-Fi Funny" data-year="2002">Drama Sci-Fi Funny 2002</p3>
+            <p3 data-name="Action Drama Sci-Fi" data-year="2004">Action Drama Sci-Fi 2004</p3>
+            <p3 data-name="Horror Funny Drama" data-year="2004">Horror Funny Drama 2004</p3>
+            <p3 data-name="Sci-Fi Action Funny" data-year="2006">Sci-Fi Action Funny 2006</p3>
+            <p3 data-name="Horror Drama Sci-Fi" data-year="2006">Horror Drama Sci-Fi 2006</p3>
+            <p3 data-name="Funny Horror Drama" data-year="2008">Funny Horror Drama 2008</p3>
+            <p3 data-name="Action Sci-Fi Horror" data-year="2008">Action Sci-Fi Horror 2008</p3>
+            <p3 data-name="Drama Funny Action" data-year="2010">Drama Funny Action 2010</p3>
+            <p3 data-name="Sci-Fi Drama Funny" data-year="2010">Sci-Fi Drama Funny 2010</p3>
+        </div>
+    </div>
+
+    <script>
+        const yearButtons = document.querySelectorAll('#yearFilterBar button');
+        const categoryButtons = document.querySelectorAll('#categoryFilterBar button');
+        const paragraphs = document.querySelectorAll('p3');
+
+        let selectedYear = null;
+        let selectedCategories = new Set();
+
+        yearButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Toggle active class
+                yearButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Set selected year
+                selectedYear = button.getAttribute('data-year');
+                filterParagraphs();
+            });
+        });
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.getAttribute('data-category');
+                
+                if (selectedCategories.has(category)) {
+                    selectedCategories.delete(category);
+                    button.classList.remove('active');
+                } else {
+                    selectedCategories.add(category);
+                    button.classList.add('active');
+                }
+                filterParagraphs();
+            });
+        });
+
+        function filterParagraphs() {
+            paragraphs.forEach(p => {
+                const yearMatch = selectedYear ? p.getAttribute('data-year') === selectedYear : true;
+                const categories = p.getAttribute('data-name').split(' ');
+                const categoryMatch = Array.from(selectedCategories).every(cat => categories.includes(cat));
+
+                if (yearMatch && categoryMatch) {
+                    p.classList.remove('hidden');
+                } else {
+                    p.classList.add('hidden');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
