@@ -16,6 +16,11 @@
             color: white;
         }
 
+        p3 {
+            display: block;
+            margin: 5px 0;
+        }
+
         .hidden {
             display: none;
         }
@@ -68,12 +73,14 @@
 
         yearButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Toggle active class
-                yearButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                // Set selected year
-                selectedYear = button.getAttribute('data-year');
+                if (button.classList.contains('active')) {
+                    button.classList.remove('active');
+                    selectedYear = null;
+                } else {
+                    yearButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    selectedYear = button.getAttribute('data-year');
+                }
                 filterParagraphs();
             });
         });
